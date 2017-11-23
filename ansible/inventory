@@ -1,0 +1,13 @@
+[mons]
+mon1 ansible_ssh_host=192.168.0.41 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+mon2 ansible_ssh_host=192.168.0.42 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+mon3 ansible_ssh_host=192.168.0.43 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[osds]
+osd1 ansible_ssh_host=192.168.0.51 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+osd2 ansible_ssh_host=192.168.0.52 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+osd3 ansible_ssh_host=192.168.0.53 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[ceph:children]
+mons
+osds

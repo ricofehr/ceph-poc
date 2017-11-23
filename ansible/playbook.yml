@@ -1,0 +1,26 @@
+---
+
+- hosts: ceph
+  serial: 1
+  become: true
+  strategy: linear
+  roles:
+    - base
+
+- hosts: mons
+  gather_facts: false
+  become: True
+  roles:
+    - ceph-defaults
+    - ceph-common
+    - ceph-config
+    - ceph-mon
+
+- hosts: osds
+  gather_facts: false
+  become: True
+  roles:
+    - ceph-defaults
+    - ceph-common
+    - ceph-config
+    - ceph-osd

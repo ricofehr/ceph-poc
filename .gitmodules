@@ -1,0 +1,15 @@
+[submodule "ansible/roles/ceph-common"]
+	path = ansible/roles/ceph-common
+	url = https://github.com/ceph/ansible-ceph-common
+[submodule "ansible/roles/ceph-defaults"]
+	path = ansible/roles/ceph-defaults
+	url = https://github.com/ceph/ansible-ceph-defaults
+[submodule "ansible/roles/ceph-config"]
+	path = ansible/roles/ceph-config
+	url = https://github.com/ceph/ansible-ceph-config
+[submodule "ansible/roles/ceph-mon"]
+	path = ansible/roles/ceph-mon
+	url = https://github.com/ceph/ansible-ceph-mon
+[submodule "ansible/roles/ceph-osd"]
+	path = ansible/roles/ceph-osd
+	url = https://github.com/ceph/ansible-ceph-osd

@@ -1,0 +1,15 @@
+---
+
+packages:
+    - sshpass
+    - vim
+    - htop
+    - iotop
+    - strace
+    - rsync
+    - links
+    - ethtool
+    - mailutils
+    - ncftp
+    - acl
+    - libmysqlclient-dev

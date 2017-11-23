@@ -1,0 +1,50 @@
+---
+
+- name: Ensure admin group is present
+  group:
+    name: admin
+    state: present
+
+- name: Ensure nd group is present
+  group:
+    name: nd
+    state: present
+
+- name: Ensure nd user is present
+  user:
+    name: nd
+    state: present
+    shell: /bin/bash
+    groups:
+      - nd
+      - admin
+    createhome: yes
+    home: /home/nd
+
+- name: Check if pubkey file exists
+  become: no
+  sudo: no
+  local_action: stat path="~/.ssh/id_rsa.pub"
+  register: file
+
+- name: Set authorized key took from file
+  authorized_key:
+    user: nd
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  when: file.stat.exists
+
+- name: Set authorized key took from file
+  authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  when: file.stat.exists
+
+- name: No passwd for admin group on sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%ADMIN ALL='
+    line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'

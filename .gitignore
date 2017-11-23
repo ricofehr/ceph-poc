@@ -1,0 +1,11 @@
+# Vagrant folder
+/.vagrant
+
+# tmp folder
+/tmp
+
+# ansible retry file
+ansible/playbook.retry
+
+# vdi files for osd
+/*.vdi

@@ -1,0 +1,26 @@
+---
+
+- name: Set default system language
+  shell: locale-gen "{{ base_locale }}"
+  when: base_locale is defined
+
+- name: set timezone to "{{ base_timezone }}"
+  timezone:
+    name: "{{ base_timezone }}"
+  when: base_timezone is defined
+
+- name: Set the hostname
+  shell: hostname "{{ inventory_hostname }}"
+
+  # hostname:
+  #   name: "{{ inventory_hostname }}"
+
+- name: Update /etc/hosts
+  lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ inventory_hostname }}' owner=root group=root mode=0644
+
+- name: "Build hosts file"
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ hostvars[item]['ansible_ssh_host'] }} {{item}}"
+    state: present
+  with_items: "{{ groups.all }}"

@@ -1,0 +1,17 @@
+---
+
+- include_vars: "packages.yml"
+
+- name: check if newer install
+  stat:
+    path: /home/nd
+  register: new_install
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+  when: not new_install.stat.exists
+
+- name: Install packages
+  apt: name={{ item }} state=installed update_cache=true force=yes
+  with_items: "{{ packages }}"

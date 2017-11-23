@@ -1,0 +1,18 @@
+mon_group_name: mons
+osd_group_name: osds
+cephx: false
+ceph_origin: 'repository'
+ceph_repository: 'community'
+ceph_mirror: http://download.ceph.com
+ceph_stable_key: https://download.ceph.com/keys/release.asc
+ceph_stable_release: jewel # ceph stable release
+ceph_stable_repo: "http://download.ceph.com/debian-{{ ceph_stable_release }}"
+#ceph_conf_key_directory: '/var/lib/ceph/mon/ceph-{{ inventory_hostname }}/'
+cluster_network: 192.168.0.0/24
+public_network: 192.168.0.0/24
+journal_size: 1024
+monitor_address: "{{ ansible_ssh_host }}"
+radosgw_address: "{{ ansible_ssh_host }}"
+os_tuning_params:
+  - { name: kernel.pid_max, value: 4194303 }
+  - { name: fs.file-max, value: 26234859 }

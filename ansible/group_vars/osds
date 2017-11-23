@@ -1,0 +1,4 @@
+devices:
+  - /dev/sdb
+journal_collocation: true
+osd_scenario: 'collocated'
