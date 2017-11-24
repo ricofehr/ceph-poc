@@ -6,6 +6,9 @@
   strategy: linear
   roles:
     - base
+  pre_tasks:
+    - name: Ensure gitmodules update
+      local_action: command git submodule update --init --recursive
 
 - hosts: mons
   gather_facts: false
