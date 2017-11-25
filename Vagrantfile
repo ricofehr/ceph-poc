@@ -30,7 +30,9 @@ Vagrant.configure("2") do |config|
           "--memory", memory.to_s,
         ]
         if node[:osd] == "yes"
-          vb.customize [ "createhd", "--filename", "disk_osd-#{node[:hostname]}", "--size", "10000" ]
+          unless File.exist?("disk_osd-#{node[:hostname]}.vdi")
+            vb.customize [ "createhd", "--filename", "disk_osd-#{node[:hostname]}", "--size", "10000" ]
+          end
           vb.customize [ "storageattach", :id, "--storagectl", "SATA Controller", "--port", 3, "--device", 0, "--type", "hdd",
           "--medium", "disk_osd-#{node[:hostname]}.vdi" ]
         end
