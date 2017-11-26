@@ -12,7 +12,7 @@
 
 - hosts: mons
   gather_facts: false
-  become: True
+  become: true
   roles:
     - ceph-defaults
     - ceph-common
@@ -21,9 +21,18 @@
 
 - hosts: osds
   gather_facts: false
-  become: True
+  become: true
   roles:
     - ceph-defaults
     - ceph-common
     - ceph-config
     - ceph-osd
+
+- hosts: clients
+  gather_facts: false
+  become: true
+  roles:
+    - ceph-defaults
+    - ceph-common
+    - ceph-config
+    - ceph-client

@@ -5,7 +5,8 @@ nodes = [
   { :hostname => 'mon3', :ip => '192.168.0.43', :box => 'xenial64' },
   { :hostname => 'osd1', :ip => '192.168.0.51', :box => 'xenial64', :ram => 1024, :osd => 'yes' },
   { :hostname => 'osd2', :ip => '192.168.0.52', :box => 'xenial64', :ram => 1024, :osd => 'yes' },
-  { :hostname => 'osd3', :ip => '192.168.0.53', :box => 'xenial64', :ram => 1024, :osd => 'yes' }
+  { :hostname => 'osd3', :ip => '192.168.0.53', :box => 'xenial64', :ram => 1024, :osd => 'yes' },
+  { :hostname => 'client1', :ip => '192.168.0.61', :box => 'xenial64' }
 ]
 
 Vagrant.configure("2") do |config|
@@ -41,7 +42,7 @@ Vagrant.configure("2") do |config|
       config.hostmanager.enabled = true
       config.hostmanager.manage_guest = true
 
-      if node[:hostname] == "osd3"
+      if node[:hostname] == "client1"
         nodeconfig.vm.provision "ansible" do |ansible|
           ansible.playbook = "ansible/playbook.yml"
           ansible.inventory_path = "ansible/inventory"

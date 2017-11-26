@@ -13,3 +13,6 @@
 [submodule "ansible/roles/ceph-osd"]
 	path = ansible/roles/ceph-osd
 	url = https://github.com/ceph/ansible-ceph-osd
+[submodule "ansible/roles/ceph-client"]
+	path = ansible/roles/ceph-client
+	url = https://github.com/ceph/ansible-ceph-client
