@@ -36,3 +36,6 @@
     - ceph-common
     - ceph-config
     - ceph-client
+    - role: rbd-create
+      tags:
+        - rbd

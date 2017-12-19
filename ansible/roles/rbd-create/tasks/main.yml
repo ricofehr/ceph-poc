@@ -1,0 +1,19 @@
+---
+
+- name: modprobe rbd
+  shell: modprobe rbd
+  become: yes
+
+- name: create rbd volume
+  shell: rbd list | grep {{ rbd_name }} || rbd create {{ rbd_name }} --size {{ rbd_size }}
+  become: yes
+
+- name: rbd feature
+  shell: rbd feature disable {{ rbd_name }} exclusive-lock object-map fast-diff deep-flatten
+  become: yes
+
+- name: create xfs volume
+  shell: >
+    rbd map {{ rbd_name }};
+    mkfs.xfs /dev/rbd0;
+  become: yes

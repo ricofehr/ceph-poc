@@ -1,0 +1,4 @@
+---
+
+rbd_name: ceph-rbd1
+rbd_size: 10240
