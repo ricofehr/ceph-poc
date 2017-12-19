@@ -16,7 +16,7 @@
   become: yes
 
 - name: create rbd volume
-  shell: rbd list | grep {{ rbd_name }} || rbd create {{ rbd_name }} --pool {{ rbd_pool_name }} --size {{ rbd_size }}
+  shell: rbd list --pool {{ rbd_pool_name }} | grep {{ rbd_name }} || rbd create {{ rbd_name }} --pool {{ rbd_pool_name }} --size {{ rbd_size }}
   become: yes
 
 - name: rbd disable feature
