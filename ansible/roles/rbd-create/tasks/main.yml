@@ -30,7 +30,7 @@
 
 - name: create xfs volume
   shell: >
-    rbd map {{ rbd_name }};
+    rbd map --pool {{ rbd_pool_name }} {{ rbd_name }};
     mkfs.xfs /dev/rbd0;
   become: yes
 
