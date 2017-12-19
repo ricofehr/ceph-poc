@@ -16,15 +16,15 @@
   become: yes
 
 - name: create rbd volume
-  shell: rbd list | grep {{ rbd_name }} || rbd create {{ rbd_name }} --size {{ rbd_size }}
+  shell: rbd list | grep {{ rbd_name }} || rbd create {{ rbd_name }} --pool {{ rbd_pool_name }} --size {{ rbd_size }}
   become: yes
 
 - name: rbd disable feature
   shell: >
-    rbd feature disable {{ rbd_name }} exclusive-lock;
-    rbd feature disable {{ rbd_name }} object-map;
-    rbd feature disable {{ rbd_name }} fast-diff;
-    rbd feature disable {{ rbd_name }} deep-flatten;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} exclusive-lock;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} object-map;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} fast-diff;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} deep-flatten;
   become: yes
   ignore_errors: true
 
