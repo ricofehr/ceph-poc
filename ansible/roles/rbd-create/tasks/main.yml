@@ -19,9 +19,14 @@
   shell: rbd list | grep {{ rbd_name }} || rbd create {{ rbd_name }} --size {{ rbd_size }}
   become: yes
 
-- name: rbd feature
-  shell: rbd feature disable {{ rbd_name }} exclusive-lock object-map fast-diff deep-flatten
+- name: rbd disable feature
+  shell: >
+    rbd feature disable {{ rbd_name }} exclusive-lock;
+    rbd feature disable {{ rbd_name }} object-map;
+    rbd feature disable {{ rbd_name }} fast-diff;
+    rbd feature disable {{ rbd_name }} deep-flatten;
   become: yes
+  ignore_errors: true
 
 - name: create xfs volume
   shell: >
