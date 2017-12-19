@@ -21,9 +21,9 @@
 
 - name: rbd disable feature
   shell: >
-    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} exclusive-lock;
-    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} object-map;
     rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} fast-diff;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} object-map;
+    rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} exclusive-lock;
     rbd feature disable --pool {{ rbd_pool_name }} {{ rbd_name }} deep-flatten;
   become: yes
   ignore_errors: true
