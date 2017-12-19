@@ -1,7 +1,7 @@
 ---
 
 - name: Create a pool
-  shell: ceph osd pool create {{ rbd_pool_name }} 1024
+  shell: ceph osd pool create {{ rbd_pool_name }} 128
   become: yes
 
 - name: Add an user for rbd volume
