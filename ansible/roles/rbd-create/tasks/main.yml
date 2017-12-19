@@ -1,5 +1,16 @@
 ---
 
+- name: Create a pool
+  shell: ceph osd pool create {{ rbd_pool_name }} 1024
+  become: yes
+
+- name: Add an user for rbd volume
+  shell: >
+    ceph auth get-or-create client.{{ rbd_user_name }} mon 'allow r'
+    osd 'allow class-read object_prefix rbd_children,
+    allow rwx pool={{ rbd_pool_name }}' -o ceph.client.{{ rbd_user_name }}.keyring
+  become: yes
+
 - name: modprobe rbd
   shell: modprobe rbd
   become: yes
@@ -17,3 +28,19 @@
     rbd map {{ rbd_name }};
     mkfs.xfs /dev/rbd0;
   become: yes
+
+- name: AuthKey admin
+  shell: ceph auth get-key client.admin | base64
+  register: adminkey
+  become: yes
+
+- name: AuthKey {{ rbd_user_name }}
+  shell: ceph auth get-key client.{{ rbd_user_name }} | base64
+  register: cephkey
+  become: yes
+
+- name: stdout authkey admin
+  debug: msg={{ adminkey.stdout }}
+
+- name: stdout {{ rbd_user_name }} admin
+  debug: msg={{ cephkey.stdout }}

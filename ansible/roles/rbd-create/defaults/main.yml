@@ -2,3 +2,5 @@
 
 rbd_name: ceph-rbd1
 rbd_size: 10240
+rbd_user_name: cephuser
+rbd_pool_name: cephpool
