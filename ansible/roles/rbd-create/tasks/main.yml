@@ -44,8 +44,8 @@
   register: cephkey
   become: yes
 
-- name: stdout authkey admin
+- name: stdout admin authkey
   debug: msg={{ adminkey.stdout }}
 
-- name: stdout {{ rbd_user_name }} admin
+- name: stdout {{ rbd_user_name }} authkey
   debug: msg={{ cephkey.stdout }}
